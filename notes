@@ -1,0 +1,126 @@
+#!/usr/bin/env bash
+
+# this script has been created on Linux specifically for bash
+# it is unknown if this would work in other unices or other than bash (maybe zsh)
+#
+# SUMMARY:
+# Create a dated text file at a specific location and append text to it.
+#
+# I got the initial file and idea from https://github.com/nickjj/notes : kudos and thanks
+# it was good as far as it went, but I needed more.
+# I wanted to use notes in a pipeline, and I wanted to determine if
+# it was being run in a tty or pipe, or no arguments or special options -a and -n
+# so this is significantly different from nickjj's version, that I thought it warrented a
+# completely different place to be stored.
+#
+# Usage:
+#   $ notes something you want to jot down (appends that text to the file)
+#   $ xclip -o | notes                     (appends your clipboard to the file)
+#   $ notes                                (opens the file in your editor)
+#   $ notes | grep ...                     (pipes note to stdout for input to a filter)
+#   $ notes -a | grep ...                  (pipes all notes files concatenated together)
+#   $ notes -1 | grep ...                  (pipes the previous file only, -2 would be the 2nd previous file etc.)
+#
+# Produces:
+#   YYYY-MM.txt, or similar named files (see NOTES_FMT_TYPE) in your $NOTES_DIRECTORY (this is set below).
+#
+# Notes format type:
+#   yearly  -> %Y
+#   monthly -> %Y-%m
+#   weekly -> %Y-w%V
+#   daily   -> %Y-%m-%d
+
+# set NOTES_FMT_TYPE to what you want below: monthly, weekly, yearly, or daily
+NOTES_FMT_TYPE="monthly"
+
+# now set NOTES DIRECTORY and NOTES EDITOR
+NOTES_DIRECTORY="${NOTES_DIRECTORY:-"${HOME}/Documents/notes"}"
+NOTES_EDITOR="${EDITOR:-"nano"}"
+
+# now set up date FMT and the Date unit
+
+case $NOTES_FMT_TYPE in
+  yearly)  FMT="%Y"; NOTES_UNIT='year';;
+  monthly) FMT="%Y-%m"; NOTES_UNIT='month';;
+  weekly) FMT="%Y-w%V"; NOTES_UNIT='week';;
+  daily)   FMT="%Y-%m-%d"; NOTES_UNIT='day';;
+esac
+
+NOTES_FILE="$(date +$FMT).txt"
+NOTES_PATH="${NOTES_DIRECTORY}/${NOTES_FILE}"
+
+mkdir -p ${NOTES_DIRECTORY}    # make sure we have the NOTES_DIRECTORY
+touch "${NOTES_PATH}"          # make sure we have the current file
+
+# FUNCTIONS:
+function argmode() {
+  # test whether first arg is a -a or <0
+  # mode 1 - nothing special just do all args
+  # mode 2 - first argument is negative number : shift this arg out
+  # mode 3 = first argument is a -a : shift this arg out
+
+  if echo "$1" | grep -Eq '^-[0-9]+$'; then
+    MODE=2
+  elif echo "$1" | grep -Eq '^-a$'; then
+    MODE=3
+  else
+    MODE=1
+  fi
+
+  return $MODE
+}
+
+function makepath() {
+  # this function will return a new path based on the argmode of the argument
+  # -a --> the new path will be NOTES_DIRECTORY/*.txt
+  # -1 --> the new path will be current date (in whatever format) - 1 unit (day, week, month, year)
+
+  # mode 1 - nothing special just do all args - no shifting needed
+  # mode 2 - first argument is negative number - shift this arg out
+  # mode 3 = first argument is a -a - shift this arg out
+
+  argmode "$1"
+  F="$(date +$FMT)"
+  NOTES_PATH="${NOTES_DIRECTORY}/${F}.txt"
+
+  if [ "$MODE" -eq "2" ]; then
+    F=$(date --date "${1} ${NOTES_UNIT}" +$FMT)
+    NOTES_PATH="${NOTES_DIRECTORY}/${F}.txt"
+  elif [ "$MODE" -eq "3" ]; then
+    NOTES_PATH="${NOTES_DIRECTORY}/*.txt"
+  fi
+}
+
+# MAIN preamble
+## debug: echo PATH was $NOTES_PATH
+makepath "$1"
+## debug: echo "in main: NOTES_PATH is: $NOTES_PATH"
+case $MODE in
+  2|3) shift ;;
+  *) ;;
+esac
+
+# MAIN body:
+# if the first argument is a -n (n == digit) then use a file of -n NOTES_UNITS ago for CASE C only
+# if the first argument is a '-a' then use all files in NOTES_DIRECTORY for cat in the case C only
+
+# echo "we now have these arguments: ${#}"
+
+if [ ${#} -eq 0 ]; then
+  if [ -p "/dev/stdin" ]; then                     # CASE A: if stdin is from a pipe ( $ some piped cmds | notes )
+    ## debug: echo "in CASE A: from a pipe"
+    (cat; printf "\n") >> "${NOTES_PATH}"
+  else
+    if [[ -t 1 ]]; then                          # CASE B: if stdin is a tty ( $ notes )
+      ## debug: echo "in CASE B: from tty"
+      eval "${NOTES_EDITOR}" "${NOTES_PATH}"
+    else                                       # CASE C: else if not a tty ( $ notes | grep ... )
+      ## debug: echo "in CASE C: not from tty"
+      cat ${NOTES_PATH}
+    fi
+  fi
+else                                               # CASE D: else there are arguments then append args to file
+  ## debug: echo "in CASE D: append all arguments to path"
+  printf "%s\n" "${*}" >> "${NOTES_PATH}"
+fi
+
