@@ -21,6 +21,7 @@ completely different place to be stored.
 In the following usage examples, you might need to install xclip on your system.
 
 ```Usage:
+  $ notes -h                             (print usage)
   $ notes something you want to jot down (appends that text to the file)
   $ xclip -o | notes                     (appends your clipboard to the file)
   $ notes                                (opens the file in your editor)
@@ -42,6 +43,19 @@ Produces:
 
 It is highly desireable to set your environment variables NOTES_DIRECTORY, and EDITOR, before you run this script
 for the first time.
+
+Installation:
+
+```
+1. copy the notes file to somewhere in your path
+2. $ chmod +x notes
+3. optionally edit your .bashrc to define the NOTES_DIRECTORY environment variable
+4. optionally edit your .bashrc to define the EDITOR environment variable
+5. if you edited your .bashrc file, then do a . .bashrc
+6. The notes script, defaults to monthly files, if you wish something else then please edit the notes file
+   and change the NOTES_FMT_TYPE to one of the one of either daily, weekly, or yearly instead.
+   
+```
 
 Tips:
 
