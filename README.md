@@ -1,4 +1,4 @@
-# notes
+# Notes
 
 This is a note taking script. It creates dated text file/files with any notes you want to stow away.
 You can have dated notes that are stored daily, monthly, weekly, or yearly. The recommendation is monthly
@@ -30,7 +30,7 @@ In the following usage examples, you might need to install xclip on your system.
   $ notes -1 | grep ...                  (pipes the previous file only, -2 would be the 2nd previous file etc.)
 ```
 
-## Produces:
+### Produces:
 
   YYYY-MM.txt, or similar named files (see NOTES_FMT_TYPE) in your $NOTES_DIRECTORY (this is set below).
 
@@ -44,7 +44,7 @@ In the following usage examples, you might need to install xclip on your system.
 It is highly desireable to set your environment variables NOTES_DIRECTORY, and EDITOR, before you run this script
 for the first time.
 
-## Installation:
+### Installation:
 
 ```
 1. copy the notes file to somewhere in your path
@@ -57,7 +57,7 @@ for the first time.
    
 ```
 
-## Tips:
+### Tips:
 
 I find it very handy to set an alias to do the grep of a notes -a. That is: 
 
@@ -78,3 +78,33 @@ $ notes tilix: Alt-(up|down) - go up or down
 ```
 
 then you can do a notes -a | grep tilix:
+
+# ns
+
+ns is a companion script to the notes command
+ns stands for notes-sed
+and is used to print out text in the notes files between two patterns
+
+so for instance, if I edited the current notes file by just doing 
+```
+$ notes (without any arguments)
+```
+
+I could add a bunch of text between two labels, like for instance:
+
+```
+BASH_TIPS
+some amount of text on as many lines as you want
+...
+END_BASH_TIPS
+```
+
+I could then do the $ ns bash_tips end_bash_tips
+(and all the text in between would then print out)
+(sort of like grep on steroids!)
+
+### Implementation:
+
+1. the arguments (patterns) are case insensitive 
+2. to account for the very real possibility that there could be more than one of either of the patterns, this script first finds the very first line of the first argument and the very last line of the second argument
+
