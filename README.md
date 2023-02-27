@@ -53,7 +53,9 @@ that it can be grepped out all together:
 
 for instance:
 
-```$ notes tilix: ^-Alt-D - create terminal Down
+```
+$ notes tilix: ^-Alt-D - create terminal Down
+$ notes tilix: ^-Alt-D - create terminal Down
 $ notes tilix: ^-Alt-R - create terminal Right
 $ notes tilix: Alt-(<-|->) - goto terminal left or right
 $ notes tilix: Alt-(up|down) - go up or down
