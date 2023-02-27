@@ -30,7 +30,7 @@ In the following usage examples, you might need to install xclip on your system.
   $ notes -1 | grep ...                  (pipes the previous file only, -2 would be the 2nd previous file etc.)
 ```
 
-Produces:
+## Produces:
 
   YYYY-MM.txt, or similar named files (see NOTES_FMT_TYPE) in your $NOTES_DIRECTORY (this is set below).
 
@@ -44,7 +44,7 @@ Produces:
 It is highly desireable to set your environment variables NOTES_DIRECTORY, and EDITOR, before you run this script
 for the first time.
 
-Installation:
+## Installation:
 
 ```
 1. copy the notes file to somewhere in your path
@@ -57,7 +57,7 @@ Installation:
    
 ```
 
-Tips:
+## Tips:
 
 I find it very handy to set an alias to do the grep of a notes -a. That is: 
 
