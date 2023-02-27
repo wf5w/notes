@@ -19,22 +19,25 @@ completely different place to be stored.
 
 In the following usage examples, you might need to install xclip on your system.
 
-Usage:
+```Usage:
   $ notes something you want to jot down (appends that text to the file)
   $ xclip -o | notes                     (appends your clipboard to the file)
   $ notes                                (opens the file in your editor)
   $ notes | grep ...                     (pipes note to stdout for input to a filter)
   $ notes -a | grep ...                  (pipes all notes files concatenated together)
   $ notes -1 | grep ...                  (pipes the previous file only, -2 would be the 2nd previous file etc.)
+```
 
 Produces:
+
   YYYY-MM.txt, or similar named files (see NOTES_FMT_TYPE) in your $NOTES_DIRECTORY (this is set below).
 
-Notes format type:
+```Notes format type:
   yearly  -> %Y
   monthly -> %Y-%m
   weekly -> %Y-w%V
   daily   -> %Y-%m-%d
+```
 
 It is highly desireable to set your environment variables NOTES_DIRECTORY, and EDITOR, before you run this script
 for the first time.
@@ -49,9 +52,10 @@ that it can be grepped out all together:
 
 for instance:
 
-$ notes tilix: ^-Alt-D - create terminal Down
+```$ notes tilix: ^-Alt-D - create terminal Down
 $ notes tilix: ^-Alt-R - create terminal Right
 $ notes tilix: Alt-(<-|->) - goto terminal left or right
 $ notes tilix: Alt-(up|down) - go up or down
+```
 
 then you can do a notes -a | grep tilix:
