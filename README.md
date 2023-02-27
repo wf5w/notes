@@ -45,7 +45,10 @@ for the first time.
 
 Tips:
 
-I find it very handy to set an alias to do the grep of a notes -a. That is: $ alias gn='notes -a | grep'
+I find it very handy to set an alias to do the grep of a notes -a. That is: 
+
+$ alias gn='notes -a | grep'
+
 Then you can use the handy gn SomeSearchText instead of notes -a | grep SomeSearchText
 
 I find it handy, if you have several lines to go together to put a keyword before each line of text, so
