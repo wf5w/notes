@@ -30,6 +30,20 @@
 #   weekly -> %Y-w%V
 #   daily   -> %Y-%m-%d
 
+if [ "$1" == "-h" ]; then
+  \cat <<EOF
+notes usage:
+  notes something you want to jot down (appends that text to the file)
+  xclip -o | notes                     (appends your clipboard to the file)
+  notes                                (opens the file in your editor)
+  notes | grep ...                     (pipes note to stdout for input to a filter)
+  notes -a | grep ...                  (pipes all notes files concatenated together)
+  notes -1 | grep ...                  (pipes the previous file only, -2 would be the 2nd previous file etc.)
+EOF
+
+exit 0
+fi
+
 # set NOTES_FMT_TYPE to what you want below: monthly, weekly, yearly, or daily
 NOTES_FMT_TYPE="monthly"
 
