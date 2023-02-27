@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+
+# ns is a companion script to the notes command
+# ns stands for notes-sed
+# and is used to print out text in the notes files between two patterns
+#
+# so for instance, if I edited the current notes file by just doing $ notes (without any arguments)
+# I could add a bunch of text between two labels, like for instance:
+# BASH_TIPS
+# some amount of text on as many lines as you want
+# ...
+# END_BASH_TIPS
+#
+# I could then do the $ ns bash_tips end_bash_tips
+# (and all the text in between would then print out)
+# (sort of like grep on steroids!)
+# 
+# Implementation:
+# to account for the very real possibility that there could be more than one of either of the patterns,
+# this script first finds the very first line of the first argument
+# and the very last line of the second argument
+
+if [ -z "$1" ]; then
+  echo "usage: ns pattern1 pattern2"
+  exit 0
+fi
+
+p1="$1"
+p2="$2"
+
+l1=$(notes -a | grep -ni "$p1" | head -1 | cut -d: -f1)
+l2=$(notes -a | grep -ni "$p2" | tail -1 | cut -d: -f1)
+
+notes -a | sed -n "${l1},${l2}p"
+
