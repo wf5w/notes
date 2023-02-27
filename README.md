@@ -9,8 +9,9 @@ it is unknown if this would work in other unices or other than bash (maybe zsh)
 
 Create a dated text file at a specific location and append text to it.
 
-I got the initial file and idea from https://github.com/nickjj/notes : kudos and thanks
-it was good as far as it went, but I needed more. I wanted to use notes in a pipeline,
+I got the initial file and idea from https://github.com/nickjj/notes : kudos and thanks.
+
+It was good as far as it went, but I needed more. I wanted to use notes in a pipeline,
 and I wanted to determine if it was being run in a tty or pipe, or no arguments or if there are 
 special options -a and -n.
 
