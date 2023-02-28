@@ -83,11 +83,13 @@ $ notes tilix: Alt-(up|down) - go up or down
 
 then you can do a notes -a | grep tilix:
 
-# ns
+# NS
+
+## Summary
 
 ns is a companion script to the notes command
-ns stands for notes-sed
-and is used to print out text in the notes files between two patterns
+
+ns stands for notes-sed, and is used to print out text in the notes files between two patterns
 
 so for instance, if I edited the current notes file by just doing 
 ```
@@ -99,15 +101,23 @@ I could add a bunch of text between two labels, like for instance:
 ```
 BASH_TIPS
 some amount of text on as many lines as you want
-...
+more text
+and even more text
+
 END_BASH_TIPS
 ```
 
-I could then do the $ ns bash_tips end_bash_tips
+I could then do the following command:
+
+```
+$ ns bash_tips end_bash_tips
+
+```
+
 (and all the text in between would then print out)
 (sort of like grep on steroids!)
 
-### Implementation:
+## Implementation:
 
 1. the arguments (patterns) are case insensitive 
 2. to account for the very real possibility that there could be more than one of either of the patterns, this script first finds the very first line of the first argument and the very last line of the second argument
