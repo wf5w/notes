@@ -1,5 +1,7 @@
 # Notes
 
+## Summary
+
 This is a note taking script. It creates dated text file/files with any notes you want to stow away.
 You can have dated notes that are stored daily, monthly, weekly, or yearly. The recommendation is monthly
 (see the Notes format type for more information).
@@ -18,6 +20,8 @@ special options -a and -n.
 So this is significantly different from nickjj's version, and I thought it warrented a
 completely different place to be stored.
 
+## Usage
+
 In the following usage examples, you might need to install xclip on your system.
 
 ```Usage:
@@ -30,7 +34,7 @@ In the following usage examples, you might need to install xclip on your system.
   $ notes -1 | grep ...                  (pipes the previous file only, -2 would be the 2nd previous file etc.)
 ```
 
-### Produces:
+The notes script produces a file in the following format:
 
   YYYY-MM.txt, or similar named files (see NOTES_FMT_TYPE) in your $NOTES_DIRECTORY (this is set below).
 
@@ -44,7 +48,7 @@ In the following usage examples, you might need to install xclip on your system.
 It is highly desireable to set your environment variables NOTES_DIRECTORY, and EDITOR, before you run this script
 for the first time.
 
-### Installation:
+## Installation:
 
 ```
 1. copy the notes file to somewhere in your path
@@ -57,7 +61,7 @@ for the first time.
    
 ```
 
-### Tips:
+## Tips:
 
 I find it very handy to set an alias to do the grep of a notes -a. That is: 
 
