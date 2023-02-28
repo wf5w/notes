@@ -62,25 +62,33 @@ for the first time.
 
 ## Tips:
 
-I find it very handy to set an alias to do the grep of a notes -a. That is: 
-
-$ alias gn='notes -a | grep'
-
-Then you can use the handy gn SomeSearchText instead of notes -a | grep SomeSearchText
-
-I find it handy, if you have several lines to go together to put a keyword before each line of text, so
-that it can be grepped out all together:
-
-for instance:
+* I find it very handy to set an alias to do the grep of a notes -a. Then you can use the handy gn SomeSearchText. That is: 
 
 ```
+$ alias gn='notes -a | grep'
+```
+
+
+* If you need to put in escape characters, you need to quote the argument, like this:
+
+```
+$ notes this is a "line\nand the next line" and more text
+```
+
+* I also find it handy, if you have several lines to go together to put a keyword before each line of text, so
+that it can be grepped out all together. Then you can do a notes -a | grep tilix: like so:
+
+```
+for instance:
+
 $ notes tilix: ^-Alt-D - create terminal Down
 $ notes tilix: ^-Alt-R - create terminal Right
 $ notes tilix: Alt-(<-|->) - goto terminal left or right
 $ notes tilix: Alt-(up|down) - go up or down
 ```
 
-then you can do a notes -a | grep tilix:
+* Alternatively, do notes without any arguments to edit the notes file directly, and add keywords before and after.  Then use the ns program below. See below example
+
 
 # NS
 
