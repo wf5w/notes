@@ -65,7 +65,7 @@ for the first time.
 * I find it very handy to set an alias to do the grep of a notes -a. Then you can use the handy gn SomeSearchText. That is: 
 
 ```
-$ alias gn='notes -a | grep'
+$ alias gn='notes -a | grep -i'
 ```
 
 
