@@ -135,6 +135,8 @@ if [ ${#} -eq 0 ]; then
   fi
 else                                               # CASE D: else there are arguments then append args to file
   ## debug: echo "in CASE D: append all arguments to path"
-  printf "%s\n" "${*}" >> "${NOTES_PATH}"
+  s="${*}"
+  echo -e "${s}" >> "${NOTES_PATH}"
+  #printf "%s\n" "${*}" >> "${NOTES_PATH}"
 fi
 
