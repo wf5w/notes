@@ -28,8 +28,13 @@ fi
 p1="$1"
 p2="$2"
 
-l1=$(notes -a | grep -ni "$p1" | head -1 | cut -d: -f1)
-l2=$(notes -a | grep -ni "$p2" | tail -1 | cut -d: -f1)
+tmpf=$(mktemp file.XXX)
+notes -a > $tmpf
 
-notes -a | sed -n "${l1},${l2}p"
+l1=$(grep -ni "$p1" $tmpf | head -1 | cut -d: -f1)
+l2=$(grep -ni "$p2" $tmpf | tail -1 | cut -d: -f1)
+
+sed -n "${l1},${l2}p" $tmpf
+rm $tmpf
+
 
