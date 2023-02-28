@@ -51,12 +51,11 @@ for the first time.
 ## Installation:
 
 ```
-1. copy the notes file to somewhere in your path
-2. $ chmod +x notes
-3. optionally edit your .bashrc to define the NOTES_DIRECTORY environment variable
-4. optionally edit your .bashrc to define the EDITOR environment variable
-5. if you edited your .bashrc file, then do a . .bashrc
-6. The notes script, defaults to monthly files, if you wish something else then please edit the notes file
+1. copy the notes and ns files to somewhere in your path
+2. optionally edit your .bashrc to define the NOTES_DIRECTORY environment variable
+3. optionally edit your .bashrc to define the EDITOR environment variable
+4. if you edited your .bashrc file, then do a . .bashrc
+5. The notes script, defaults to monthly files, if you wish something else then please edit the notes file
    and change the NOTES_FMT_TYPE to one of the one of either daily, weekly, or yearly instead.
    
 ```
