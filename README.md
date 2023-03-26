@@ -89,6 +89,25 @@ $ notes tilix: Alt-(up|down) - go up or down
 
 * Alternatively, do notes without any arguments to edit the notes file directly, and add keywords before and after.  Then use the ns program below. See below example
 
+## Use the same notes directory on multiple linux clients
+
+let say you have a notes directory (in ~/Documents/notes) on your server machine
+that you want to be able to access on your client.
+
+here is how to do that:
+* create a passwordless ssh from your client to your server, and test it
+* install sshfs if it is not already installed
+* edit /etc/fuse.conf and uncomment user_allow_other
+* mount your server notes directory to your local client mount point
+
+remote: ~/Documents/notes 
+
+local: create a mount point (~/Documents/notes)
+
+$ sshfs user@remote_machine:/home/user/Documents/notes/ ~/Documents/notes
+
+once you have this working, then look at this to set it up on fstab:
+see https://ubuntuforums.org/showthread.php?t=430312 for explanation
 
 # NS
 
@@ -129,23 +148,5 @@ $ ns bash_tips end_bash_tips
 1. the arguments (patterns) are case insensitive 
 2. to account for the very real possibility that there could be more than one of either of the patterns, this script first finds the very first line of the first argument and the very last line of the second argument
 
-## Use the same notes directory on multiple linux clients
 
-let say you have a notes directory (in ~/Documents/notes) on your server machine
-that you want to be able to access on your client.
-
-here is how to do that:
-* create a passwordless ssh from your client to your server, and test it
-* install sshfs if it is not already installed
-* edit /etc/fuse.conf and uncomment user_allow_other
-* mount your server notes directory to your local client mount point
-
-remote: ~/Documents/notes 
-
-local: create a mount point (~/Documents/notes)
-
-$ sshfs user@remote_machine:/home/user/Documents/notes/ ~/Documents/notes
-
-once you have this working, then look at this to set it up on fstab:
-see https://ubuntuforums.org/showthread.php?t=430312 for explanation
 
