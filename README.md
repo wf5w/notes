@@ -150,7 +150,7 @@ $ ns bash_tips end_bash_tips
 
 # FN
 
-Find in files. This script is similar to ns, but shows in which notes files, and what line number in those files, what you are trying to find.
+Find in files. This script is similar to doing $ notes -a | grep, but shows in which notes files, and what line number in those files, what you are trying to find.
 
 for instance:
 
