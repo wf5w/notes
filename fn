@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+# this little script, does a grep on all the files in the NOTES_DIRECTORY
+# and finds all files that have that regexp in them.
+#
+# this is so, you can quickly find what file something might be in, so you can
+# edit it. Like using notes -3 to get to the file that you need to edit.
+
+if [ -z $1 ]; then
+  usage: fn regexp
+  exit 0
+fi
+
+file=$(mktemp)
+
+grep -ni "${1}" $NOTES_DIRECTORY/* > $file
+# | awk -F':' '{idx = split($1, fparts, "/"); print fparts[idx, ":", $2, ":", $3, $4, $5, $6, $7 }'
+while read -r line; do
+  fn=$(echo $line | awk -F':' '{idx = split($1, fparts, "/"); printf "%-s: %5.5d\n", fparts[idx], $2}')
+  text=$(echo $line | awk -F':' 'BEGIN {OFS=":"} {$1=""; $2=""; print}')
+
+  if [ "${#text}" -gt 70 ]; then suffix='...'; else suffix=' '; fi
+  
+  echo $fn ":" ${text:2:70} $suffix
+done < $file
+
+rm $file
