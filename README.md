@@ -148,5 +148,26 @@ $ ns bash_tips end_bash_tips
 1. the arguments (patterns) are case insensitive 
 2. to account for the very real possibility that there could be more than one of either of the patterns, this script first finds the very first line of the first argument and the very last line of the second argument
 
+# FN
+
+Find in files. This script is similar to ns, but shows in which notes files, and what line number in those files, what you are trying to find.
+
+for instance:
+
+```
+fn lvim
+2023-04.txt: 00050 : lunarvim_config : define custom keys in .config/lvim/config.lua
+2023-04.txt: 00051 : lvim.keys.normal_mode["<A-h>"] = "<C-w>h"
+2023-04.txt: 00052 : lvim.keys.normal_mode["<A-j>"] = "<C-w>j"
+2023-04.txt: 00053 : lvim.keys.normal_mode["<A-k>"] = "<C-w>k"
+2023-04.txt: 00054 : lvim.keys.normal_mode["<A-l>"] = "<C-w>l"
+2023-04.txt: 00056 : lvim.keys.normal_mode["h1"] = "i====== ======<esc>7hi"
+2023-04.txt: 00057 : lvim.keys.normal_mode["h2"] = "i===== =====<esc>6hi"
+2023-04.txt: 00058 : lvim.keys.normal_mode["h3"] = "i==== ====<esc>5hi"
+2023-04.txt: 00059 : lvim.keys.normal_mode["h4"] = "i=== ===<esc>4hi"
+2023-04.txt: 00060 : lvim.keys.normal_mode["h5"] = "i== ==<esc>3hi"
+2023-04.txt: 00061 : lvim.keys.normal_mode["<C-A-b>"] = "gg^i#/usr/bin/env bash<cr><cr><esc ...
+2023-04.txt: 00068 : better lualine style: lvim.builtin.lualine.style = "default"
+```
 
 
